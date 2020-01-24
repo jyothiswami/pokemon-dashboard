@@ -1,27 +1,14 @@
 import React, {Component}  from 'react';
 import './dashboard.css';
-import img1 from '../src/assets/Desert.jpg';
-   
-const Dashboard = props =>{
-    return(
-        <div className="card text-center">
-            <div className="overflow">
-                <img src={img1} alt="image1"/>
-            </div>
-            <div className="card-body text-dark">
-                <h4 className=" card-title">Card Title</h4>
-                <p className="card-text text-secondary"> 
-                    blablana blablanabla blanablab lanabla blanab lablanab labla nablablan a  blablanablablanablablanablablanablablana
-                </p>
-                <a href="#" className="btn btn-outline-success">GO anywere</a>
-            </div>
-        </div>
-    )
-}
-export default Dashboard;
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-/* export default class Api extends Component{
-        constructor(props){
+ export default class Dashboard extends Component{
+    constructor(props){
         super(props);
         this.state ={
             items : [],
@@ -30,7 +17,7 @@ export default Dashboard;
     }
 
     componentDidMount(){
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             .then(res=> res.json())
             .then(json => {
                 this.setState({
@@ -51,27 +38,20 @@ export default Dashboard;
            <div>
                 <ul>
                     {items.map(item => (
-                        <li key={item.name} className="box">
-                            <div>Name: {item.name} </div>
-                            <div><button>Show details</button></div>
-                            <Card>
-                                <CardPrimaryContent>
-                                    <h1>Header</h1>
-                                    <CardMedia square imageUrl='./my/fancy/image.png' />
-                                </CardPrimaryContent>
-                            
-                                <CardActions>
-                                    <CardActionButtons>
-                                        <button>Click Me</button>
-                                    </CardActionButtons>
-                                </CardActions>
-                            </Card>
-                        </li>
+                        <Card key={item.name} className='card'>
+                            <CardContent>
+                                <Typography className='something' color="textSecondary" gutterBottom>
+                                {item.name}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="medium">Show details</Button>
+                            </CardActions>
+                        </Card>
                     ))}
                 </ul>
            </div>
        );
-    }
-        
+    } 
       } 
-}*/
+}

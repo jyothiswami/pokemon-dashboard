@@ -10,3 +10,10 @@
 button{
     margin: 20px;
 }
+
+.card {
+    width: 30%;
+    display: inline;
+    float: left;
+    margin: 2% 1%;
+}
