@@ -30,6 +30,7 @@ export default class Api extends Component{
     }
     render() {
         const { error, isLoaded, items } = this.state;
+        console.log(this.state);
         if (error) {
           return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
