@@ -25,12 +25,13 @@ export default Dashboard;
         super(props);
         this.state ={
             items : [],
+            pokemonDetails: {},
             loading : false
         }
     }
 
-    componentDidMount(){
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+    fetchListOfPokemon() {
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             .then(res=> res.json())
             .then(json => {
                 this.setState({
@@ -39,6 +40,23 @@ export default Dashboard;
                 })
             });
     }
+
+    fetchDetailsOfPokemon(pokemon) {
+        fetch(encodeURI(pokemon.url))
+            .then(res=> res.json())
+            .then(json => {
+                console.log('details is ', json);
+                this.setState({
+                    loading : true,
+                    pokemonDetails : json.results
+                })
+            });
+    }
+
+    componentDidMount(){
+        this.fetchListOfPokemon();
+    }
+
 
     render() {
         var { loading, items} = this.state;
@@ -51,22 +69,16 @@ export default Dashboard;
            <div>
                 <ul>
                     {items.map(item => (
-                        <li key={item.name} className="box">
-                            <div>Name: {item.name} </div>
-                            <div><button>Show details</button></div>
-                            <Card>
-                                <CardPrimaryContent>
-                                    <h1>Header</h1>
-                                    <CardMedia square imageUrl='./my/fancy/image.png' />
-                                </CardPrimaryContent>
-                            
-                                <CardActions>
-                                    <CardActionButtons>
-                                        <button>Click Me</button>
-                                    </CardActionButtons>
-                                </CardActions>
-                            </Card>
-                        </li>
+                        <Card key={item.name} className='card'>
+                            <CardContent>
+                                <Typography className='something' color="textSecondary" gutterBottom>
+                                {item.name}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="medium" onClick={(e) => this.fetchDetailsOfPokemon(item)}>Show details</Button>
+                            </CardActions>
+                        </Card>
                     ))}
                 </ul>
            </div>
