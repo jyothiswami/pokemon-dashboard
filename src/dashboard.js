@@ -35,7 +35,7 @@ import Typography from '@material-ui/core/Typography';
                 console.log('res is ', json);
                 this.setState({
                     loading : true,
-                    item : json.results
+                    items : json.results
                 })
             });
     }
@@ -53,7 +53,7 @@ import Typography from '@material-ui/core/Typography';
         else{
             return(
                 <div>
-                    <h1>List Of Pokemon </h1>
+                    <h1> { items && items.length ? 'List Of Pokemon' : '' }</h1>
                         <ul>
                             {items.map(item => (
                                 <Card key={item.name} className='card'>
